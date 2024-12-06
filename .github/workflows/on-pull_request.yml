@@ -1,0 +1,16 @@
+---
+name: on pull_request
+
+"on":
+  pull_request:
+    types:
+      - edited
+      - opened
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  lint-gha:
+    uses: ./.github/workflows/wf-lint-gha.yml

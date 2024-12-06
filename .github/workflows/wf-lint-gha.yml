@@ -1,0 +1,14 @@
+---
+name: Lint GitHub Actions
+
+"on":
+  workflow_call:
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: reviewdog/action-yamllint@v1
+      - uses: reviewdog/action-actionlint@v1
