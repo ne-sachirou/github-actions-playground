@@ -5,10 +5,16 @@ name: Lint GitHub Actions
   workflow_call:
 
 jobs:
-  lint:
-    name: Lint
-    runs-on: ubuntu-24.04
+  lint-gha:
+    name: Lint GitHub Actions
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: reviewdog/action-yamllint@v1
+        with:
+          fail_level: error
+          reporter: github-pr-review
       - uses: reviewdog/action-actionlint@v1
+        with:
+          fail_level: error
+          reporter: github-pr-review
