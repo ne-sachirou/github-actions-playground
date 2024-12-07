@@ -1,10 +1,12 @@
 ---
-name: on workflow_run
+name: on workflow_run completed
 
 "on":
   workflow_run:
     workflows:
       - on pull_request
+    types:
+      - completed
 
 jobs:
   observe-gha:
