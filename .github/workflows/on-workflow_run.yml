@@ -1,0 +1,12 @@
+---
+name: on workflow_run
+
+"on":
+  workflow_run:
+    workflows:
+      - on pull_request
+
+jobs:
+  observe-gha:
+    uses: ./.github/workflows/wf-observe-gha.yml
+    secrets: inherit
