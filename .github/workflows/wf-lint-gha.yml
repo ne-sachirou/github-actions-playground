@@ -16,5 +16,6 @@ jobs:
           reporter: github-pr-review
       - uses: reviewdog/action-actionlint@v1
         with:
-          fail_level: error
+          # fail_level: error
+          fail_on_error: true
           reporter: github-pr-review
