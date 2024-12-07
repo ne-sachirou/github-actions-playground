@@ -11,7 +11,6 @@ jobs:
       - uses: corentinmusard/otel-cicd-action@v1
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          otelServiceName: ${{ env.GITHUB_REPOSITORY }}
           otlpEndpoint: https://otlp-vaxila.mackerelio.com/v1/traces
           otlpHeaders: Accept=*/*,Mackerel-Api-Key=${{ secrets.MACKEREL_APIKEY }}
           runId: ${{ github.event.workflow_run.id }}
