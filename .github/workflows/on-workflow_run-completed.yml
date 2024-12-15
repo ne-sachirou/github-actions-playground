@@ -9,6 +9,56 @@ name: on workflow_run completed
       - completed
 
 jobs:
+  show-event:
+    name: Show GitHub Actions event
+    runs-on: ubuntu-latest
+    steps:
+      # https://docs.github.com/ja/webhooks/webhook-events-and-payloads?actionType=completed#workflow_run
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            console.info("keys of github.event", Object.keys(context.payload));
+            console.info(
+              "keys of github.event.workflow",
+              Object.keys(context.payload.workflow),
+            );
+            for (let key of [
+              "created_at",
+              "id",
+              "name",
+              "node_id",
+              "path",
+              "state",
+              "updated_at",
+            ]) {
+              console.info(`github.event.workflow.${key}`, context.payload.workflow[key]);
+            }
+            console.info(
+              "keys of github.event.workflow_run",
+              Object.keys(context.payload.workflow_run),
+            );
+            for (let key of [
+              "conclusion",
+              "created_at",
+              "event",
+              "head_branch",
+              "head_sha",
+              "id",
+              "name",
+              "node_id",
+              "path",
+              "run_number",
+              "run_started_at",
+              "status",
+              "updated_at",
+              "workflow_id",
+              "display_title",
+            ]) {
+              console.info(
+                `github.event.workflow_run.${key}`,
+                context.payload.workflow_run[key],
+              );
+            }
   observe-gha:
     uses: ./.github/workflows/wf-observe-gha.yml
     secrets: inherit
