@@ -18,15 +18,6 @@ jobs:
         with:
           script: |
             console.info("github.event", context.payload)
-      - name: get the workflow filename
-        id: get-the-workflow-filename
-        # yamllint disable rule:line-length
-        run: |
-          echo -n "${{github.event.workflow_run.path}}" | \
-          node -e 'console.info("filename=" + /([^/]+)\.ya?ml$/.exec(require("fs").readFileSync(0, "utf-8"))[1])' >> "$GITHUB_OUTPUT"
-        # yamllint enable rule:line-length
-      - name: show the workflow filename
-        run: echo "${{steps.get-the-workflow-filename.outputs.filename}}"
   observe-gha:
     uses: ./.github/workflows/wf-observe-gha.yml
     secrets: inherit
