@@ -19,47 +19,7 @@ jobs:
       - uses: actions/github-script@v7
         with:
           script: |
-            console.info("keys of github.event", Object.keys(context.payload));
-            for (let key of ["action", "after", "before", "number"]) {
-              console.info(`github.event.${key}`, context.payload[key]);
-            }
-            console.info(
-              "keys of github.event.pull_request",
-              Object.keys(context.payload.pull_request),
-            );
-            for (let key of [
-              "active_lock_reason",
-              "additions",
-              "author_association",
-              "body",
-              "changed_files",
-              "closed_at",
-              "comments",
-              "commits",
-              "created_at",
-              "deletions",
-              "draft",
-              "id",
-              "locked",
-              "maintainer_can_modify",
-              "merge_commit_sha",
-              "mergeable",
-              "mergeable_state",
-              "merged",
-              "merged_at",
-              "node_id",
-              "number",
-              "rebaseable",
-              "review_comments",
-              "state",
-              "title",
-              "updated_at",
-            ]) {
-              console.info(
-                `github.event.pull_request.${key}`,
-                context.payload.pull_request[key],
-              );
-            }
+            console.info("github.event", context.payload)
   lint-gha:
     uses: ./.github/workflows/wf-lint-gha.yml
     secrets: inherit
