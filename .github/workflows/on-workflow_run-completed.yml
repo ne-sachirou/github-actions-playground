@@ -20,10 +20,9 @@ jobs:
             console.info("github.event", context.payload)
       - name: get the workflow filename
         id: get-the-workflow-filename
-        uses: actions/github-script@v7
-        with:
-          script: |
-            return /([^/]+)\.ya?ml$/.exec(context.payload.workflow_run.path)[1]
+        run: |
+          echo -n "${{github.event.workflow_run.path}}" | \
+          node -e 'console.info(/([^/]+)\.ya?ml$/.exec(require("fs").readFileSync(0, "utf-8"))[1])' >> "$GITHUB_OUTPUT"
       - name: show the workflow filename
         run: echo "${{steps.get-the-workflow-filename.outputs.result}}"
   observe-gha:
