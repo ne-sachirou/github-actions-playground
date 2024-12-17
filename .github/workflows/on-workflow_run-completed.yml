@@ -21,7 +21,6 @@ jobs:
       - name: get the workflow filename
         id: get-the-workflow-filename
         uses: actions/github-script@v7
-        result-encoding: string
         with:
           script: |
             return /([^/]+)\.ya?ml$/.exec('context.payload.workflow_run.path')[1]
