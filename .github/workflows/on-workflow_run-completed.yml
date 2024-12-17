@@ -23,8 +23,8 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            return /([^/]+)\.ya?ml$/.exec('context.payload.workflow_run.path')[1]
-      - name: Show the workflow filename
+            return /([^/]+)\.ya?ml$/.exec(context.payload.workflow_run.path)[1]
+      - name: show the workflow filename
         run: echo "${{steps.get-the-workflow-filename.outputs.result}}"
   observe-gha:
     uses: ./.github/workflows/wf-observe-gha.yml
