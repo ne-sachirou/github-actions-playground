@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # https://docs.github.com/ja/webhooks/webhook-events-and-payloads?actionType=completed#workflow_run
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         with:
           script: |
             console.info("github.event", context.payload)
