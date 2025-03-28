@@ -16,7 +16,7 @@ jobs:
       # https://docs.github.com/ja/webhooks/webhook-events-and-payloads?actionType=opened#pull_request
       # https://docs.github.com/ja/webhooks/webhook-events-and-payloads?actionType=reopened#pull_request
       # https://docs.github.com/ja/webhooks/webhook-events-and-payloads?actionType=synchronize#pull_request
-      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
+      - uses: actions/github-script@3908079ba1e7bce10117ad701c321d07e89017a9
         with:
           script: |
             console.info("github.event", context.payload)
