@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - uses: reviewdog/action-yamllint@f01d8a48fd8d89f89895499fca2cff09f9e9e8c0
+      - uses: reviewdog/action-yamllint@1b1b6df34e7b178d78d8432a68b4f5ddc95b1c7e
         with:
           fail_level: error
           reporter: github-pr-review
