@@ -11,7 +11,7 @@ permissions:
 jobs:
   show-event:
     name: Show GitHub Actions event
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       # https://docs.github.com/ja/webhooks/webhook-events-and-payloads?actionType=opened#pull_request
       # https://docs.github.com/ja/webhooks/webhook-events-and-payloads?actionType=reopened#pull_request
