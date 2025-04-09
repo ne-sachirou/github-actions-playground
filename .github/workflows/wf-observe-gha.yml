@@ -6,6 +6,7 @@ name: Observe GitHub Actions
 
 jobs:
   otel-cicd-action:
+    timeout-minutes: 1
     runs-on: ubuntu-24.04
     steps:
       - name: get the workflow filename

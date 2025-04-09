@@ -4,13 +4,13 @@ name: on pull_request
 "on":
   pull_request_target:
 
-permissions:
-  contents: read
-  pull-requests: write
-
 jobs:
   show-event:
     name: Show GitHub Actions event
+    permissions:
+      contents: read
+      pull-requests: write
+    timeout-minutes: 1
     runs-on: ubuntu-24.04
     steps:
       # https://docs.github.com/ja/webhooks/webhook-events-and-payloads?actionType=opened#pull_request
@@ -21,5 +21,8 @@ jobs:
           script: |
             console.info("github.event", context.payload)
   lint-gha:
+    permissions:
+      contents: read
+      pull-requests: write
     uses: ./.github/workflows/wf-lint-gha.yml
     secrets: inherit
