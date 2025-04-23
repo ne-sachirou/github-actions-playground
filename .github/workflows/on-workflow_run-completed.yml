@@ -11,6 +11,7 @@ name: on workflow_run completed
 jobs:
   show-event:
     name: Show GitHub Actions event
+    permissions: {}
     timeout-minutes: 1
     runs-on: ubuntu-24.04
     steps:
@@ -20,5 +21,6 @@ jobs:
           script: |
             console.info("github.event", context.payload)
   observe-gha:
+    permissions: {}
     uses: ./.github/workflows/wf-observe-gha.yml
     secrets: inherit
