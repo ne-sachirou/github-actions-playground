@@ -27,4 +27,6 @@ jobs:
       contents: read
       pull-requests: read
     uses: ./.github/workflows/wf-observe-gha.yaml
-    secrets: inherit
+    secrets:
+      MACKEREL_APIKEY: ${{ secrets.MACKEREL_APIKEY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

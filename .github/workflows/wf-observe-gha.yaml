@@ -3,6 +3,11 @@ name: Observe GitHub Actions
 
 "on":
   workflow_call:
+    secrets:
+      GITHUB_TOKEN:
+        required: true
+      MACKEREL_APIKEY:
+        required: true
 
 jobs:
   otel-cicd-action:
