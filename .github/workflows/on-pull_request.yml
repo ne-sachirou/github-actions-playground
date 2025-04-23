@@ -7,9 +7,7 @@ name: on pull_request
 jobs:
   show-event:
     name: Show GitHub Actions event
-    permissions:
-      contents: read
-      pull-requests: write
+    permissions: {}
     timeout-minutes: 1
     runs-on: ubuntu-24.04
     steps:
