@@ -1,5 +1,5 @@
 ---
-name: on workflow_run completed
+name: on pull_request workflow_run completed
 
 "on":
   workflow_run:  # zizmor: ignore[dangerous-triggers]
@@ -26,5 +26,5 @@ jobs:
       checks: read
       contents: read
       pull-requests: read
-    uses: ./.github/workflows/wf-observe-gha.yml
+    uses: ./.github/workflows/wf-observe-gha.yaml
     secrets: inherit
