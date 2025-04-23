@@ -7,5 +7,5 @@ help:
 lint-gha: ## Lint GitHub Actions
 	yamllint .github/workflows/
 	actionlint
-	ghalint run || true
-	zizmor . || true
+	ghalint run
+	zizmor .
