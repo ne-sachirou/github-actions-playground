@@ -4,7 +4,7 @@ name: Observe GitHub Actions
 "on":
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
+      secrets_github_token:
         required: true
       MACKEREL_APIKEY:
         required: true
@@ -30,7 +30,7 @@ jobs:
             core.setOutput("filename", match[1]);
       - uses: corentinmusard/otel-cicd-action@32b29919dceea928e1c83dc69804973061a68825  # v2.2.3
         with:
-          githubToken: ${{secrets.GITHUB_TOKEN}}
+          githubToken: ${{secrets.secrets_github_token}}
           otelServiceName: ${{steps.get-the-workflow-filename.outputs.filename}}
           otlpEndpoint: https://otlp-vaxila.mackerelio.com/v1/traces
           otlpHeaders: Accept=*/*,Mackerel-Api-Key=${{secrets.MACKEREL_APIKEY}}

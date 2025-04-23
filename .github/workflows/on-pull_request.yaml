@@ -24,4 +24,4 @@ jobs:
       pull-requests: write
     uses: ./.github/workflows/wf-lint-gha.yaml
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      secrets_github_token: ${{ secrets.GITHUB_TOKEN }}
