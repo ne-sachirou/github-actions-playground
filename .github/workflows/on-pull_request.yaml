@@ -23,5 +23,3 @@ jobs:
       contents: read
       pull-requests: write
     uses: ./.github/workflows/wf-lint-gha.yaml
-    secrets:
-      secrets_github_token: ${{ secrets.GITHUB_TOKEN }}

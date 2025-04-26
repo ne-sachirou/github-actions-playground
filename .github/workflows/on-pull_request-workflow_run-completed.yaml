@@ -29,4 +29,3 @@ jobs:
     uses: ./.github/workflows/wf-observe-gha.yaml
     secrets:
       MACKEREL_APIKEY: ${{ secrets.MACKEREL_APIKEY }}
-      secrets_github_token: ${{ secrets.GITHUB_TOKEN }}

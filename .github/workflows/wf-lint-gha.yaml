@@ -3,9 +3,6 @@ name: Lint GitHub Actions
 
 "on":
   workflow_call:
-    secrets:
-      secrets_github_token:
-        required: true
 
 jobs:
   actionlint:
@@ -23,7 +20,7 @@ jobs:
         with:
           # fail_level: error
           fail_on_error: true
-          github_token: ${{secrets.secrets_github_token}}
+          github_token: ${{github.token}}
           reporter: github-pr-review
 
   ghalint:
@@ -40,11 +37,11 @@ jobs:
         with:
           aqua_version: v2.50.0
         env:
-          AQUA_GITHUB_TOKEN: ${{secrets.secrets_github_token}}
+          AQUA_GITHUB_TOKEN: ${{github.token}}
       - run: |
           ghalint run
         env:
-          AQUA_GITHUB_TOKEN: ${{secrets.secrets_github_token}}
+          AQUA_GITHUB_TOKEN: ${{github.token}}
           GHALINT_LOG_COLOR: always
 
   yamllint:
@@ -61,7 +58,7 @@ jobs:
       - uses: reviewdog/action-yamllint@f01d8a48fd8d89f89895499fca2cff09f9e9e8c0  # v1.21.0
         with:
           fail_level: error
-          github_token: ${{secrets.secrets_github_token}}
+          github_token: ${{github.token}}
           reporter: github-pr-review
 
   zizmor:
@@ -80,4 +77,4 @@ jobs:
       - run: |
           zizmor .
         env:
-          GH_TOKEN: ${{secrets.secrets_github_token}}
+          GH_TOKEN: ${{github.token}}
