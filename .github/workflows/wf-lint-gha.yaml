@@ -6,7 +6,7 @@ name: Lint GitHub Actions
 
 jobs:
   actionlint:
-    name: Lint GitHub Actions by actionlint
+    name: actionlint
     permissions:
       contents: read
       pull-requests: write
@@ -24,7 +24,7 @@ jobs:
           reporter: github-pr-review
 
   ghalint:
-    name: Lint GitHub Actions by ghalint
+    name: ghalint
     runs-on: ubuntu-24.04
     permissions:
       contents: read
@@ -45,7 +45,7 @@ jobs:
           GHALINT_LOG_COLOR: always
 
   yamllint:
-    name: Lint GitHub Actions by yamllint
+    name: yamllint
     permissions:
       contents: read
       pull-requests: write
@@ -62,7 +62,7 @@ jobs:
           reporter: github-pr-review
 
   zizmor:
-    name: Lint GitHub Actions by zizmor
+    name: zizmor
     runs-on: ubuntu-24.04
     permissions:
       contents: read
