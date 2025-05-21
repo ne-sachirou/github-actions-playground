@@ -5,4 +5,4 @@ registries:
 
 packages:
   - name: suzuki-shunsuke/ghalint@v1.4.0
-  - name: takumin/zizmor-bin@v1.7.0
+  - name: takumin/zizmor-bin@v1.8.0
