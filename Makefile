@@ -4,7 +4,7 @@ SHELL=/bin/bash
 help:
 	@awk -F':.*##' '/^[-_a-zA-Z0-9]+:.*##/{printf"%-12s\t%s\n",$$1,$$2}' $(MAKEFILE_LIST) | sort
 
-lint: lint-gha ## Lint
+lint: lint-gha lint-renovate ## Lint
 	yamllint .
 
 lint-gha:
@@ -12,3 +12,6 @@ lint-gha:
 	actionlint
 	ghalint run
 	zizmor .
+
+lint-renovate:
+	npx --package renovate -- renovate-config-validator
