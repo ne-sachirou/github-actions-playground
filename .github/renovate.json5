@@ -1,27 +1,33 @@
 {
-  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
-    ":configMigration",
-    "config:recommended",
-    "github>aquaproj/aqua-renovate-config#2.9.0",
+    ':configMigration',
+    'config:recommended',
+    'github>aquaproj/aqua-renovate-config#2.9.0',
   ],
-
-  labels: ["dependencies"],
+  labels: [
+    'dependencies',
+  ],
   packageRules: [
     {
       automerge: true,
-      matchUpdateTypes: ["patch"],
-    },
-  ],
-  regexManagers: [
-    {
-      fileMatch: ["^Makefile$"],
-      matchStrings: [
-        "npx --package (?<depName>[^@]+)@(?<currentValue>[^\\s]+)",
+      matchUpdateTypes: [
+        'patch',
       ],
-      datasourceTemplate: "npm",
     },
   ],
-  schedule: "after 10am and before 7pm every weekday",
-  timezone: "Asia/Tokyo",
+  customManagers: [
+    {
+      customType: 'regex',
+      managerFilePatterns: [
+        '/^Makefile$/',
+      ],
+      matchStrings: [
+        'npx --package (?<depName>[^@]+)@(?<currentValue>[^\\s]+)',
+      ],
+      datasourceTemplate: 'npm',
+    },
+  ],
+  schedule: 'after 10am and before 7pm every weekday',
+  timezone: 'Asia/Tokyo',
 }
