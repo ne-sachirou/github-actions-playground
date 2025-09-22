@@ -5,21 +5,21 @@
     "config:recommended",
     "github>aquaproj/aqua-renovate-config#2.9.0",
   ],
-
+  customManagers: [
+    {
+      customType: "regex",
+      datasourceTemplate: "npm",
+      managerFilePatterns: ["/^Makefile$/"],
+      matchStrings: [
+        "npx --package (?<depName>[^@]+)@(?<currentValue>[^\\s]+)",
+      ],
+    },
+  ],
   labels: ["dependencies"],
   packageRules: [
     {
       automerge: true,
       matchUpdateTypes: ["patch"],
-    },
-  ],
-  regexManagers: [
-    {
-      fileMatch: ["^Makefile$"],
-      matchStrings: [
-        "npx --package (?<depName>[^@]+)@(?<currentValue>[^\\s]+)",
-      ],
-      datasourceTemplate: "npm",
     },
   ],
   schedule: "after 10am and before 7pm every weekday",
