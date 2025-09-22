@@ -13,6 +13,15 @@
       matchUpdateTypes: ["patch"],
     },
   ],
+  regexManagers: [
+    {
+      fileMatch: ["^Makefile$"],
+      matchStrings: [
+        "npx --package (?<depName>[^@]+)@(?<currentValue>[^\\s]+)",
+      ],
+      datasourceTemplate: "npm",
+    },
+  ],
   schedule: "after 10am and before 7pm every weekday",
   timezone: "Asia/Tokyo",
 }
