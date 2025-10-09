@@ -9,7 +9,10 @@
     {
       customType: "regex",
       datasourceTemplate: "npm",
-      managerFilePatterns: ["/^Makefile$/"],
+      managerFilePatterns: [
+        "/^Makefile$/",
+        "/^\\.github\\/workflows\\/on-pull_request\\.ya?ml$/",
+      ],
       matchStrings: [
         "npx --package (?<depName>[^@]+)@(?<currentValue>[^\\s]+)",
       ],
@@ -17,6 +20,12 @@
   ],
   labels: ["dependencies"],
   packageRules: [
+    {
+      groupName: "renovate-cli",
+      groupSlug: "renovate-cli",
+      matchManagers: ["regex"],
+      matchPackageNames: ["renovate"],
+    },
     {
       automerge: true,
       matchUpdateTypes: ["patch"],
