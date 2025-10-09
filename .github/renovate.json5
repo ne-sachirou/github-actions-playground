@@ -1,36 +1,44 @@
 {
-  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
-    ":configMigration",
-    "config:recommended",
-    "github>aquaproj/aqua-renovate-config#2.9.0",
+    ':configMigration',
+    'config:recommended',
+    'github>aquaproj/aqua-renovate-config#2.9.0',
   ],
   customManagers: [
     {
-      customType: "regex",
-      datasourceTemplate: "npm",
+      customType: 'regex',
+      datasourceTemplate: 'npm',
       managerFilePatterns: [
-        "/^Makefile$/",
-        "/^\\.github\\/workflows\\/on-pull_request\\.ya?ml$/",
+        '/^Makefile$/',
+        '/^\\.github\\/workflows\\/on-pull_request\\.ya?ml$/',
       ],
       matchStrings: [
-        "npx --package (?<depName>[^@]+)@(?<currentValue>[^\\s]+)",
+        'npx --package (?<depName>[^@]+)@(?<currentValue>[^\\s]+)',
       ],
     },
   ],
-  labels: ["dependencies"],
+  labels: [
+    'dependencies',
+  ],
   packageRules: [
     {
-      groupName: "renovate-cli",
-      groupSlug: "renovate-cli",
-      matchManagers: ["regex"],
-      matchPackageNames: ["renovate"],
+      groupName: 'renovate-cli',
+      groupSlug: 'renovate-cli',
+      matchManagers: [
+        'custom.regex',
+      ],
+      matchPackageNames: [
+        'renovate',
+      ],
     },
     {
       automerge: true,
-      matchUpdateTypes: ["patch"],
+      matchUpdateTypes: [
+        'patch',
+      ],
     },
   ],
-  schedule: "after 10am and before 7pm every weekday",
-  timezone: "Asia/Tokyo",
+  schedule: 'after 10am and before 7pm every weekday',
+  timezone: 'Asia/Tokyo',
 }
