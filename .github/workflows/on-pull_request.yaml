@@ -40,4 +40,4 @@ jobs:
         with:
           node-version: '24'
       - name: Validate Renovate configuration
-        run: npx --package renovate@41.149.0 -- renovate-config-validator
+        run: npx --package renovate@41.149.2 -- renovate-config-validator
