@@ -19,14 +19,14 @@ jobs:
     steps:
       - name: get the workflow filename
         id: get-the-workflow-filename
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd  # v8.0.0
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         with:
           script: |
             const path = context.payload.workflow_run.path;
             const match = path.match(/([^/]+)\.ya?ml$/);
             if (!match) throw new Error("Invalid workflow filename");
             core.setOutput("filename", match[1]);
-      - uses: corentinmusard/otel-cicd-action@769ccb38830ff3d1600ffb2f35ba9da6724e6b3e  # v2.2.4
+      - uses: corentinmusard/otel-cicd-action@769ccb38830ff3d1600ffb2f35ba9da6724e6b3e # v2.2.4
         with:
           githubToken: ${{github.token}}
           otelServiceName: ${{steps.get-the-workflow-filename.outputs.filename}}
