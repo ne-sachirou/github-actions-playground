@@ -14,4 +14,4 @@ lint-gha:
 	zizmor .
 
 lint-renovate:
-	npx --package renovate@42.2.0 -- renovate-config-validator --strict
+	npx --package renovate@42.5.2 -- renovate-config-validator --strict
