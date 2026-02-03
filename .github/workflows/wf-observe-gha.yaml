@@ -1,5 +1,5 @@
 ---
-name: Observe GitHub Actions
+name: GitHub Actions を観測
 
 "on":
   workflow_call:
