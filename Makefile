@@ -8,6 +8,7 @@ lint: lint-gha lint-renovate ## Lint
 	yamllint .
 
 lint-gha:
+	npx prettier -c .github/workflows/
 	yamllint .github/workflows/
 	actionlint
 	ghalint run

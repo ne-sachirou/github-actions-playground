@@ -10,7 +10,7 @@ name: on pull_request workflow_run completed
 
 jobs:
   show-event:
-    name: Show GitHub Actions event
+    name: GitHub Actions のイベントを表示
     permissions: {}
     timeout-minutes: 1
     runs-on: ubuntu-24.04
