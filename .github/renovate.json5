@@ -21,6 +21,7 @@
   labels: [
     'dependencies',
   ],
+  minimumReleaseAge: '1 day',
   packageRules: [
     {
       groupName: 'renovate-cli',
