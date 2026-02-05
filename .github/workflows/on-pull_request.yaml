@@ -6,7 +6,7 @@ name: on pull_request
 
 jobs:
   show-event:
-    name: GitHub Actions のイベントを表示
+    name: GitHub Actionsのeventを表示(debug用)
     permissions: {}
     timeout-minutes: 1
     runs-on: ubuntu-24.04
@@ -25,7 +25,7 @@ jobs:
     uses: ./.github/workflows/wf-lint-gha.yaml
 
   validate-renovate-config:
-    name: Renovate 設定を検証
+    name: Renovateの設定を檢證
     runs-on: ubuntu-24.04
     permissions:
       contents: read
