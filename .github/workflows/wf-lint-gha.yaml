@@ -1,5 +1,5 @@
 ---
-name: GitHub Actions をリント
+name: Lint GitHub Actions
 
 "on":
   workflow_call:

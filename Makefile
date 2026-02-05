@@ -11,8 +11,8 @@ lint-gha:
 	npx prettier -c .github/workflows/
 	yamllint .github/workflows/
 	actionlint
-	ghalint run
 	zizmor .
+	ghalint run
 
 lint-renovate:
 	npx --package renovate@43.3.2 -- renovate-config-validator --strict
