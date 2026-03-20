@@ -26,17 +26,15 @@
     {
       groupName: 'renovate-cli',
       groupSlug: 'renovate-cli',
+      automerge: true,
       matchManagers: [
         'custom.regex',
       ],
       matchPackageNames: [
         'renovate',
       ],
-    },
-    {
-      automerge: true,
       matchUpdateTypes: [
-        'patch',
+        'minor',
       ],
     },
   ],
