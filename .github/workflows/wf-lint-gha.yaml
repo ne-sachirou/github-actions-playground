@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
-      - uses: ne-sachirou/lint-gha-reviewdog@d143d09775609bb7335eb11bfaceace46d43007c
+      - uses: ne-sachirou/lint-gha-reviewdog@47315c74bcffa1c74c12a6e1f004bf6e1fd4147b
         with:
           fail_on_error: true
           filter_mode: nofilter
