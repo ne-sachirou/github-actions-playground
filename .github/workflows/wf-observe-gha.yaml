@@ -9,6 +9,8 @@ name: Observe GitHub Actions
 
 jobs:
   otel-cicd-action:
+    environment:
+      name: github-actions-observability
     permissions:
       actions: read
       checks: read

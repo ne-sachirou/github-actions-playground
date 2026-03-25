@@ -20,6 +20,7 @@ jobs:
             console.info("github.event", context.payload)
   lint-gha:
     permissions:
+      checks: write
       contents: read
       pull-requests: write
     uses: ./.github/workflows/wf-lint-gha.yaml

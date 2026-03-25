@@ -5,9 +5,10 @@ name: Lint GitHub Actions
   workflow_call:
 
 jobs:
-  actionlint:
-    name: actionlint
+  lint-gha-reviewdog:
+    name: lint-gha-reviewdog
     permissions:
+      checks: write
       contents: read
       pull-requests: write
     timeout-minutes: 10
@@ -16,31 +17,10 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
-      - uses: reviewdog/action-actionlint@0d952c597ef8459f634d7145b0b044a9699e5e43 # v1.71.0
+      - uses: ne-sachirou/lint-gha-reviewdog@47315c74bcffa1c74c12a6e1f004bf6e1fd4147b # v0.0.1
         with:
-          # fail_level: error
           fail_on_error: true
           github_token: ${{github.token}}
-          reporter: github-pr-review
-
-  ghalint:
-    name: ghalint
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: read
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          persist-credentials: false
-      - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
-        with:
-          aqua_version: v2.57.1
-      - run: |
-          ghalint run
-        env:
-          AQUA_GITHUB_TOKEN: ${{github.token}}
-          GHALINT_LOG_COLOR: always
 
   yamllint:
     name: yamllint
@@ -58,21 +38,3 @@ jobs:
           fail_level: error
           github_token: ${{github.token}}
           reporter: github-pr-review
-
-  zizmor:
-    name: zizmor
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: read
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          persist-credentials: false
-      - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
-        with:
-          aqua_version: v2.57.1
-      - run: |
-          zizmor .
-        env:
-          GH_TOKEN: ${{github.token}}
