@@ -18,6 +18,7 @@
       ],
     },
   ],
+  dependencyDashboard: true,
   labels: ["dependencies"],
   minimumReleaseAge: "1 day",
   packageRules: [
@@ -32,4 +33,7 @@
   ],
   schedule: "after 10am and before 7pm every weekday",
   timezone: "Asia/Tokyo",
+  vulnerabilityAlerts: {
+    labels: ["dependencies", "security"],
+  },
 }
