@@ -17,10 +17,11 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
-      - uses: ne-sachirou/lint-gha-reviewdog@94c3e6b2cd7531221f68ea3a188d0fdeac0f0749
+      - uses: ne-sachirou/lint-gha-reviewdog@d143d09775609bb7335eb11bfaceace46d43007c
         with:
-          github_token: ${{github.token}}
           fail_on_error: true
+          filter_mode: nofilter
+          github_token: ${{github.token}}
 
   yamllint:
     name: yamllint
