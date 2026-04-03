@@ -3,7 +3,6 @@
   extends: [
     ":configMigration",
     "config:recommended",
-    "github>aquaproj/aqua-renovate-config#2.11.0",
   ],
   customManagers: [
     {
