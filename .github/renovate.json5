@@ -16,7 +16,7 @@
   ],
   dependencyDashboard: true,
   labels: ["dependencies"],
-  minimumReleaseAge: "1 day",
+  minimumReleaseAge: "3 days",
   packageRules: [
     {
       groupName: "renovate-cli",
