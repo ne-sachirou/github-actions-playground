@@ -20,4 +20,4 @@ lint-gha:
 	ghalint run
 
 lint-renovate:
-	npx --package renovate@43.249.0 -- renovate-config-validator --strict
+	npx --package renovate@43.251.0 -- renovate-config-validator --strict
