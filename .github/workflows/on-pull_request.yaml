@@ -23,7 +23,7 @@ jobs:
       checks: write
       contents: read
       pull-requests: write
-    uses: ./.github/workflows/wf-lint-gha.yaml
+    uses: ./.github/workflows/wf-lint-gha.yaml # zizmor: ignore[self-repository]
 
   validate-renovate-config:
     name: Renovateの設定を檢證

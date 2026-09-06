@@ -26,6 +26,6 @@ jobs:
       checks: read
       contents: read
       pull-requests: read
-    uses: ./.github/workflows/wf-observe-gha.yaml
+    uses: ./.github/workflows/wf-observe-gha.yaml # zizmor: ignore[self-repository]
     secrets:
       MACKEREL_APIKEY: ${{ secrets.MACKEREL_APIKEY }}
