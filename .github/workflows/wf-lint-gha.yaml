@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: ne-sachirou/lint-gha-reviewdog@27db2b994012175441165bc1bf863606eb89798f # v0.0.10
+      - uses: ne-sachirou/lint-gha-reviewdog@9afe0b2cbb72192a7a4787405047b4ffdcc5d63b # v0.0.11
         with:
           fail_on_error: true
           github_token: ${{github.token}}
