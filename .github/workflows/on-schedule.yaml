@@ -1,0 +1,13 @@
+---
+name: on schedule
+
+"on":
+  schedule:
+    - cron: "23 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  check-go:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/wf-check-go.yaml # zizmor: ignore[self-repository]

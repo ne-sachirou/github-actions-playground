@@ -1,0 +1,13 @@
+---
+name: on push
+
+"on":
+  push:
+    branches:
+      - main
+
+jobs:
+  check-go:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/wf-check-go.yaml # zizmor: ignore[self-repository]
