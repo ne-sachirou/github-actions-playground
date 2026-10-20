@@ -1,0 +1,97 @@
+---
+name: Check Go application
+
+"on":
+  workflow_call:
+
+jobs:
+  check-go:
+    name: Go static checks, tests and build
+    permissions:
+      contents: read
+    timeout-minutes: 15
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: go-app
+    env:
+      GOTOOLCHAIN: local
+      GOFLAGS: -mod=readonly
+    steps:
+      - name: コードをチェックアウト
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: go.modのtoolchainを選択
+        id: toolchain
+        # setup-goのgo-version-fileはtoolchainではなくgo directiveを読む。
+        run: |
+          version="$(awk '$1 == "toolchain" { sub(/^go/, "", $2); print $2 }' go.mod)"
+          test -n "$version"
+          printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
+      - name: Goをセットアップ
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: ${{ steps.toolchain.outputs.version }}
+          cache-dependency-path: go-app/go.sum
+      - name: toolchainを確認
+        run: go version
+      - name: formatを検査
+        run: |
+          unformatted="$(gofmt -l .)"
+          if [ -n "$unformatted" ]; then
+            printf '%s\n' "$unformatted"
+            exit 1
+          fi
+      - name: moduleの整合性を検査
+        run: |
+          go mod tidy -diff
+          go mod download
+          go mod verify
+      - name: 静的検査
+        run: |
+          go vet ./...
+          go tool staticcheck ./...
+          go tool gosec ./...
+      - name: race detector付きtest
+        run: >-
+          go test -race -shuffle=on -count=1 -timeout=5m
+          -covermode=atomic -coverprofile=coverage.out ./...
+      - name: buildとsmoke test
+        run: |
+          go build -mod=readonly -trimpath -o dist/go-app .
+          printf 'Hello, World!\n' > dist/expected.txt
+          dist/go-app > dist/actual.txt
+          diff -u dist/expected.txt dist/actual.txt
+
+  vulnerability-go:
+    name: Go vulnerability scan
+    permissions:
+      contents: read
+    timeout-minutes: 10
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: go-app
+    env:
+      GOTOOLCHAIN: local
+      GOFLAGS: -mod=readonly
+    steps:
+      - name: コードをチェックアウト
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: go.modのtoolchainを選択
+        id: toolchain
+        # setup-goのgo-version-fileはtoolchainではなくgo directiveを読む。
+        run: |
+          version="$(awk '$1 == "toolchain" { sub(/^go/, "", $2); print $2 }' go.mod)"
+          test -n "$version"
+          printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
+      - name: Goをセットアップ
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: ${{ steps.toolchain.outputs.version }}
+          cache-dependency-path: go-app/go.sum
+      - name: 既知の脆弱性を検査
+        run: go tool govulncheck ./...
