@@ -22,10 +22,17 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - name: go.modのtoolchainを選択
+        id: toolchain
+        # setup-goのgo-version-fileはtoolchainではなくgo directiveを読む。
+        run: |
+          version="$(awk '$1 == "toolchain" { sub(/^go/, "", $2); print $2 }' go.mod)"
+          test -n "$version"
+          printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
       - name: Goをセットアップ
         uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
-          go-version-file: go-app/go.mod
+          go-version: ${{ steps.toolchain.outputs.version }}
           cache-dependency-path: go-app/go.sum
       - name: toolchainと検査toolを確認
         run: |
@@ -79,10 +86,17 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - name: go.modのtoolchainを選択
+        id: toolchain
+        # setup-goのgo-version-fileはtoolchainではなくgo directiveを読む。
+        run: |
+          version="$(awk '$1 == "toolchain" { sub(/^go/, "", $2); print $2 }' go.mod)"
+          test -n "$version"
+          printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
       - name: Goをセットアップ
         uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
-          go-version-file: go-app/go.mod
+          go-version: ${{ steps.toolchain.outputs.version }}
           cache-dependency-path: go-app/go.sum
       - name: 既知の脆弱性を検査
         run: |
