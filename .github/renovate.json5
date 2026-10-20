@@ -4,14 +4,6 @@
   customManagers: [
     {
       customType: "regex",
-      datasourceTemplate: "go",
-      managerFilePatterns: ["/^\\.github\\/workflows\\/wf-check-go\\.yaml$/"],
-      matchStrings: [
-        "# renovate: depName=(?<depName>\\S+)\\s+go install \\S+@(?<currentValue>v\\S+)",
-      ],
-    },
-    {
-      customType: "regex",
       datasourceTemplate: "npm",
       managerFilePatterns: [
         "/^Makefile$/",

@@ -34,13 +34,8 @@ jobs:
         with:
           go-version: ${{ steps.toolchain.outputs.version }}
           cache-dependency-path: go-app/go.sum
-      - name: toolchainと検査toolを確認
-        run: |
-          go version
-          # renovate: depName=honnef.co/go/tools
-          go install honnef.co/go/tools/cmd/staticcheck@v0.8.2
-          # renovate: depName=github.com/securego/gosec/v2
-          go install github.com/securego/gosec/v2/cmd/gosec@v2.29.0
+      - name: toolchainを確認
+        run: go version
       - name: formatを検査
         run: |
           unformatted="$(gofmt -l .)"
@@ -56,8 +51,8 @@ jobs:
       - name: 静的検査
         run: |
           go vet ./...
-          staticcheck ./...
-          gosec ./...
+          go tool staticcheck ./...
+          go tool gosec ./...
       - name: race detector付きtest
         run: >-
           go test -race -shuffle=on -count=1 -timeout=5m
@@ -99,7 +94,4 @@ jobs:
           go-version: ${{ steps.toolchain.outputs.version }}
           cache-dependency-path: go-app/go.sum
       - name: 既知の脆弱性を検査
-        run: |
-          # renovate: depName=golang.org/x/vuln
-          go install golang.org/x/vuln/cmd/govulncheck@v1.9.0
-          govulncheck ./...
+        run: go tool govulncheck ./...
