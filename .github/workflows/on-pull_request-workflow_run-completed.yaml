@@ -5,6 +5,7 @@ name: on pull_request workflow_run completed
   workflow_run: # zizmor: ignore[dangerous-triggers]
     workflows:
       - on pull_request
+      - on pull_request Go
     types:
       - completed
 

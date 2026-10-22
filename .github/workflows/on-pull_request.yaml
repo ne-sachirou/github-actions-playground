@@ -5,11 +5,6 @@ name: on pull_request
   pull_request:
 
 jobs:
-  check-go:
-    permissions:
-      contents: read
-    uses: ./.github/workflows/wf-check-go.yaml # zizmor: ignore[self-repository]
-
   show-event:
     name: GitHub Actionsのeventを表示(debug用)
     permissions: {}
