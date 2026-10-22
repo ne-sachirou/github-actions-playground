@@ -1,0 +1,16 @@
+---
+name: on pull_request Node.js
+
+"on":
+  pull_request:
+    paths:
+      - node-app/**
+      # Node.js用CI自体の変更も検証する。
+      - .github/workflows/on-pull_request-node.yaml
+      - .github/workflows/wf-check-node.yaml
+
+jobs:
+  check-node:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/wf-check-node.yaml # zizmor: ignore[self-repository]
