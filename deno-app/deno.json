@@ -3,6 +3,10 @@
     "@std/assert": "jsr:@std/assert@1.0.19"
   },
   "tasks": {
-    "start": "deno run main.ts"
-  }
+    "start": "deno run main.ts",
+    "check": "deno check --frozen --all main.ts main_test.ts",
+    "test": "deno test --frozen --no-prompt --shuffle --coverage=coverage",
+    "build": "deno compile --frozen --no-prompt --output dist/deno-app main.ts"
+  },
+  "exclude": ["coverage", "dist"]
 }

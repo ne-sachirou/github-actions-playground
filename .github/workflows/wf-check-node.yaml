@@ -1,0 +1,63 @@
+---
+name: Check Node.js application
+
+"on":
+  workflow_call:
+
+jobs:
+  check-node:
+    name: Node.js static checks, tests and build
+    permissions:
+      contents: read
+    timeout-minutes: 15
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: node-app
+    steps:
+      - name: コードをチェックアウト
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Node.jsをセットアップ
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: node-app/package-lock.json
+      - name: lockfileに従って依存を取得
+        run: npm ci --ignore-scripts
+      - name: formatとlintを検査
+        run: npm run lint
+      - name: 型検査
+        run: npm run check
+      - name: coverage付きtest
+        run: npm test
+      - name: buildとsmoke test
+        run: |
+          npm run build
+          printf 'Hello, World!\n' > dist/expected.txt
+          node dist/main.js > dist/actual.txt
+          diff -u dist/expected.txt dist/actual.txt
+
+  vulnerability-node:
+    name: Node.js vulnerability scan
+    permissions:
+      contents: read
+    timeout-minutes: 10
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: node-app
+    steps:
+      - name: コードをチェックアウト
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Node.jsをセットアップ
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+      # build/test用のdevDependenciesも監査する。CIでは自動修正しない。
+      - name: 既知の脆弱性を検査
+        run: npm audit --include=dev --audit-level=moderate

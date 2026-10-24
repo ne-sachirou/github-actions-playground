@@ -1,0 +1,61 @@
+---
+name: Check Deno application
+
+"on":
+  workflow_call:
+
+jobs:
+  check-deno:
+    name: Deno static checks, tests and build
+    permissions:
+      contents: read
+    timeout-minutes: 15
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: deno-app
+    steps:
+      - name: コードをチェックアウト
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Denoをセットアップ
+        uses: denoland/setup-deno@22d081ff2d3a40755e97629de92e3bcbfa7cf2ed # v2.0.5
+        with:
+          deno-version: v2.9.7
+      - name: formatとlintを検査
+        run: |
+          deno fmt --check
+          deno lint
+      - name: lockfileと型を検査
+        run: deno task check
+      # greetingの出力にI/O権限は不要。-Aやallow-*を付けずに検査する。
+      - name: 最小権限でcoverage付きtest
+        run: deno task test
+      - name: buildとsmoke test
+        run: |
+          deno task build
+          printf 'Hello, World!\n' > dist/expected.txt
+          dist/deno-app > dist/actual.txt
+          diff -u dist/expected.txt dist/actual.txt
+
+  vulnerability-deno:
+    name: Deno vulnerability scan
+    permissions:
+      contents: read
+    timeout-minutes: 10
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: deno-app
+    steps:
+      - name: コードをチェックアウト
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Denoをセットアップ
+        uses: denoland/setup-deno@22d081ff2d3a40755e97629de92e3bcbfa7cf2ed # v2.0.5
+        with:
+          deno-version: v2.9.7
+      - name: 既知の脆弱性を検査
+        run: deno audit --frozen --level=moderate

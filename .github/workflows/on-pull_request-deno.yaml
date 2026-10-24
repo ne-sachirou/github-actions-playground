@@ -1,0 +1,16 @@
+---
+name: on pull_request Deno
+
+"on":
+  pull_request:
+    paths:
+      - deno-app/**
+      # Deno用CI自体の変更も検証する。
+      - .github/workflows/on-pull_request-deno.yaml
+      - .github/workflows/wf-check-deno.yaml
+
+jobs:
+  check-deno:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/wf-check-deno.yaml # zizmor: ignore[self-repository]

@@ -6,6 +6,8 @@ name: on pull_request workflow_run completed
     workflows:
       - on pull_request
       - on pull_request Go
+      - on pull_request Node.js
+      - on pull_request Deno
     types:
       - completed
 
