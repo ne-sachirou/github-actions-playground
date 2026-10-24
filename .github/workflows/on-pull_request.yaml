@@ -9,7 +9,7 @@ jobs:
     name: GitHub Actionsのeventを表示(debug用)
     permissions: {}
     timeout-minutes: 1
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       # https://docs.github.com/ja/webhooks/webhook-events-and-payloads?actionType=opened#pull_request
       # https://docs.github.com/ja/webhooks/webhook-events-and-payloads?actionType=reopened#pull_request
@@ -27,7 +27,7 @@ jobs:
 
   validate-renovate-config:
     name: Renovateの設定を檢證
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     timeout-minutes: 10
