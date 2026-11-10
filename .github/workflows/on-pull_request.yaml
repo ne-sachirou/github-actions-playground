@@ -41,4 +41,4 @@ jobs:
         with:
           node-version: "26"
       - name: Renovate 設定を検証
-        run: npx --package renovate@44.186.4 -- renovate-config-validator
+        run: npx --package renovate@44.222.0 -- renovate-config-validator
