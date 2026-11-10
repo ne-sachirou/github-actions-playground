@@ -17,7 +17,7 @@ jobs:
       contents: read
       pull-requests: read
     timeout-minutes: 1
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: workflowのfile名を取得
         id: get-the-workflow-filename
