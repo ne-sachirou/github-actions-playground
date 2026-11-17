@@ -1,35 +1,51 @@
 {
-  $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  extends: [":configMigration", "config:recommended"],
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    ':configMigration',
+    'config:recommended',
+  ],
   customManagers: [
     {
-      customType: "regex",
-      datasourceTemplate: "npm",
+      customType: 'regex',
+      datasourceTemplate: 'npm',
       managerFilePatterns: [
-        "/^Makefile$/",
-        "/^\\.github\\/workflows\\/on-pull_request\\.ya?ml$/",
+        '/^Makefile$/',
+        '/^\\.github\\/workflows\\/on-pull_request\\.ya?ml$/',
       ],
       matchStrings: [
-        "npx --package (?<depName>[^@]+)@(?<currentValue>[^\\s]+)",
+        'npx --package (?<depName>[^@]+)@(?<currentValue>[^\\s]+)',
       ],
     },
   ],
-  dependencyDashboard: true,
-  labels: ["dependencies"],
-  minimumReleaseAge: "3 days",
+  dependencyDashboard: {
+    enabled: true,
+  },
+  labels: [
+    'dependencies',
+  ],
+  minimumReleaseAge: '3 days',
   packageRules: [
     {
-      groupName: "renovate-cli",
-      groupSlug: "renovate-cli",
+      groupName: 'renovate-cli',
+      groupSlug: 'renovate-cli',
       automerge: true,
-      matchManagers: ["custom.regex"],
-      matchPackageNames: ["renovate"],
-      matchUpdateTypes: ["minor"],
+      matchManagers: [
+        'custom.regex',
+      ],
+      matchPackageNames: [
+        'renovate',
+      ],
+      matchUpdateTypes: [
+        'minor',
+      ],
     },
   ],
-  schedule: "after 10am and before 7pm every weekday",
-  timezone: "Asia/Tokyo",
+  schedule: 'after 10am and before 7pm every weekday',
+  timezone: 'Asia/Tokyo',
   vulnerabilityAlerts: {
-    labels: ["dependencies", "security"],
+    labels: [
+      'dependencies',
+      'security',
+    ],
   },
 }
