@@ -14,7 +14,9 @@
       ],
     },
   ],
-  dependencyDashboard: true,
+  dependencyDashboard: {
+    enabled: true,
+  },
   labels: ["dependencies"],
   minimumReleaseAge: "3 days",
   packageRules: [
